@@ -1,0 +1,32 @@
+#Python
+
+grid = [[1,2], [3,4]]
+
+def VF():
+    temp = grid[0][0]
+    grid[0][0] = grid[0][1]
+    grid[0][1] = temp
+
+    temp2 = grid[1][0]
+    grid[1][0] = grid[1][1]
+    grid[1][1] = temp2
+
+def HF():
+    temp = grid[0][0]
+    grid[0][0] = grid[1][0]
+    grid[1][0] = temp
+
+    temp2 = grid[0][1]
+    grid[0][1] = grid[1][1]
+    grid[1][1] = temp2
+
+hv = input()
+ha = list(hv)
+
+for i in ha:
+    if i.upper() == "H":
+        HF()
+    if i.upper() == "V":
+        VF()
+
+print(str(grid[0][0]) + " " + str(grid[0][1]) + "\n" + str(grid[1][0]) + " " + str(grid[1][1]))
