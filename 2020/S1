@@ -1,0 +1,44 @@
+//Code is in Java
+
+/*
+Prompt: Canadian Computing Competition: 2020 Stage 1, Senior #1
+Trick E. Dingo is trying, as usual, to catch his nemesis the Street Sprinter. His past attempts using magnets, traps and explosives have failed miserably, so he's catching his breath to gather observational data and learn more about how fast Street Sprinter is.
+
+Trick E. Dingo and Street Sprinter both inhabit a single straight west-east road with a particularly famous rock on it known affectionately as The Origin. Positions on this straight road are measured numerically according to the distance from The Origin, using negative numbers for positions west of The Origin and positive numbers for positions east of The Origin.
+
+The observations by Trick E. Dingo each contain two numbers: a time, and the value of Street Sprinter's position on the road at that time. Given this information, what speed must Street Sprinter be capable of?
+
+*/
+
+import java.util.*;
+
+public class S1_redo {
+    public static void main(String[] args)
+     {
+
+         Scanner in = new Scanner(System.in);
+         HashMap<Double,Double> values = new HashMap<>();
+
+         String numbers = in.nextLine();
+         int max = Integer.parseInt(numbers);
+        Double [] time = new Double[max];
+        ArrayList<Double> results = new ArrayList<Double>();
+
+        for(int i = 0; i< max; i++){
+            String x = in.nextLine();
+            String [] parts = x.split(" ");
+            values.put(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]));
+            time[i] = (Double.parseDouble(parts[0]));
+        }
+
+         Arrays.sort(time);
+
+        for(int i = 1; i < max; i++){
+            results.add(Math.abs((values.get(time[i]) - values.get(time[i-1])) / (time[i] - time[i-1])));
+        }
+
+       Collections.sort(results, Collections.reverseOrder());
+
+        System.out.println(results.get(0));
+    }
+}
