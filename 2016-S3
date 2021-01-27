@@ -1,0 +1,67 @@
+//This code is in java.
+/*
+Prompt: Problem Description
+An anagram of a string is formed by rearranging the letters in the string. For example, the anagrams
+of aab are aab, aba, and baa.
+A wildcard anagram of a string is an anagram of the string where some of the letters might have
+been replaced with an asterisk (*). For example, two possible wildcard anagrams of aab are *ab
+and *b*.
+Given two strings, determine whether the second string is a wildcard anagram of the first string.
+*/
+
+//Note: this scores 13/15, I am working on a complete solution
+
+import java.util.*;
+
+public class test_file {
+
+    public static void isAnagram2(String [] str1, String [] str2){
+        boolean test = true;
+
+        if(str1.length != str2.length){
+            test = false;
+        }
+
+        int counter =0;
+        for (String value : str2) {
+            if (value.equals("*")) {
+                counter += 1;
+            }
+        }
+
+        ArrayList<String> temp = new ArrayList<>();
+        for (String s : str1) {
+            temp.add(s);
+            if (Collections.frequency(temp, s) == 1) {
+                if (Collections.frequency(Arrays.asList(str1), s) != Collections.frequency(Arrays.asList(str2), s)) {
+                    int differnce = Collections.frequency(Arrays.asList(str1), s) - Collections.frequency(Arrays.asList(str2), s);
+                    counter -= differnce;
+
+                    if (counter < 0) {
+                        test = false;
+                    }
+                }
+            }
+        }
+
+        if(test){
+            System.out.println("A");
+        }
+        else {
+            System.out.println("N");
+        }
+
+
+    }
+
+    public static void main(String[] args){
+
+        Scanner in = new Scanner(System.in);
+        String [] str1 = in.nextLine().split("");
+        String [] str2 = in.nextLine().split("");
+        Arrays.sort(str1, Collections.reverseOrder());
+        Arrays.sort(str2, Collections.reverseOrder());
+
+        isAnagram2(str1, str2);
+    }
+}
